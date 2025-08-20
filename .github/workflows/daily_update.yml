@@ -1,0 +1,43 @@
+name: Daily Movie Info Update
+
+on:
+  schedule:
+    # 每天北京时间早上8点运行
+    # 0 0 * * * 是 UTC 时间，比北京时间晚8小时
+    - cron: '0 0 * * *'
+  # 也可以手动触发
+  workflow_dispatch:
+
+jobs:
+  update-movies:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install selenium webdriver-manager beautifulsoup4 jinja2
+
+      - name: Install Chrome for Selenium
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Run scraping script
+        run: python scrape_and_generate.py
+      
+      - name: Commit and push changes
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add index.html
+          git commit -m "Auto update daily movie ranking" || echo "No changes to commit"
+          git push
