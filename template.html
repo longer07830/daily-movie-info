@@ -8,11 +8,14 @@
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.6; background-color: #f4f4f4; color: #333; padding: 20px; max-width: 900px; margin: auto; }
         h1 { text-align: center; color: #555; }
         .update-time { text-align: center; font-size: 0.9em; color: #777; margin-bottom: 20px; }
-        .movie-card { display: flex; align-items: center; background-color: #fff; padding: 15px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.2s ease-in-out; }
+        .movie-card { display: flex; align-items: flex-start; background-color: #fff; padding: 15px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.2s ease-in-out; }
         .movie-card:hover { transform: translateY(-5px); }
-        .movie-card img { width: 100px; height: 140px; border-radius: 4px; object-fit: cover; margin-right: 20px; }
+        .movie-card img { width: 100px; height: 140px; border-radius: 4px; object-fit: cover; margin-right: 20px; flex-shrink: 0; }
+        .movie-info { flex-grow: 1; }
         .movie-info h2 { margin: 0 0 5px; color: #007bff; }
-        .movie-info p { margin: 0; color: #666; }
+        .movie-info p { margin: 0 0 8px; color: #666; }
+        .summary { font-size: 0.9em; color: #555; }
+        .summary::before { content: "简介："; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -28,6 +31,9 @@
             <div class="movie-info">
                 <h2>{{ loop.index }}. {{ movie.title }}</h2>
                 <p><strong>评分:</strong> {{ movie.rating }}</p>
+                <p><strong>导演:</strong> {{ movie.director }}</p>
+                <p><strong>主演:</strong> {{ movie.actors }}</p>
+                <p class="summary">{{ movie.summary }}</p>
             </div>
         </div>
         {% endfor %}
