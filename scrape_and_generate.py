@@ -54,13 +54,10 @@ def get_movie_details(movie_url):
     return details
 
 
-def scrape_movie_data():
+def scrape_board(url, title):
     """
-    使用 Selenium 抓取热门影视榜单信息，并进一步获取详情页数据。
+    通用抓取函数，用于抓取不同榜单的数据。
     """
-    # 猫眼电影的热映口碑榜 URL
-    url = "https://www.maoyan.com/board/1" 
-    
     # 配置 Selenium WebDriver
     chrome_options = Options()
     chrome_options.add_argument("--headless")
@@ -77,10 +74,10 @@ def scrape_movie_data():
         print(f"WebDriver 初始化失败: {e}")
         return []
     
-    movie_list = []
+    data_list = []
 
     try:
-        print("使用 Selenium 访问猫眼电影榜单页面...")
+        print(f"使用 Selenium 访问 {title} 榜单页面...")
         driver.get(url)
         
         # 等待页面加载，特别是动态内容
@@ -96,24 +93,24 @@ def scrape_movie_data():
             try:
                 # 找到电影标题
                 title_tag = item.find('p', class_='name')
-                title = title_tag.get_text(strip=True) if title_tag else '未知'
+                item_title = title_tag.get_text(strip=True) if title_tag else '未知'
 
                 # 找到评分
                 score_tag = item.find('i', class_='integer')
                 score_decimal_tag = item.find('i', class_='fraction')
-                score = f"{score_tag.get_text(strip=True)}{score_decimal_tag.get_text(strip=True)}" if score_tag and score_decimal_tag else '暂无评分'
+                item_score = f"{score_tag.get_text(strip=True)}{score_decimal_tag.get_text(strip=True)}" if score_tag and score_decimal_tag else '暂无评分'
 
                 # 找到海报图片
                 image_tag = item.find('img', class_='board-img')
                 image_url = image_tag.get('data-src') if image_tag else ''
 
                 # 获取电影详情页的链接
-                movie_link_tag = item.find('a', class_='image-link')
-                movie_link = f"https://www.maoyan.com{movie_link_tag.get('href')}" if movie_link_tag else None
+                item_link_tag = item.find('a', class_='image-link')
+                item_link = f"https://www.maoyan.com{item_link_tag.get('href')}" if item_link_tag else None
 
-                movie_data = {
-                    'title': title,
-                    'rating': score,
+                item_data = {
+                    'title': item_title,
+                    'rating': item_score,
                     'image': image_url,
                     'director': '未知',
                     'actors': '未知',
@@ -121,16 +118,16 @@ def scrape_movie_data():
                 }
                 
                 # 如果有详情页链接，就去抓取详情
-                if movie_link:
-                    print(f"  正在抓取 '{title}' 的详情页...")
-                    details = get_movie_details(movie_link)
-                    movie_data.update(details)
+                if item_link:
+                    print(f"  正在抓取 '{item_title}' 的详情页...")
+                    details = get_movie_details(item_link)
+                    item_data.update(details)
                     time.sleep(1) # 增加延迟，避免被封禁
                 
-                movie_list.append(movie_data)
+                data_list.append(item_data)
 
             except AttributeError as e:
-                print(f"解析单个电影信息失败: {e}")
+                print(f"解析单个信息失败: {e}")
                 continue
                 
     except Exception as e:
@@ -139,7 +136,7 @@ def scrape_movie_data():
         # 确保浏览器被关闭，释放资源
         driver.quit()
             
-    return movie_list
+    return data_list
 
 # --- B. 网页生成部分 ---
 def generate_html_page(data):
@@ -149,7 +146,7 @@ def generate_html_page(data):
     env = Environment(loader=FileSystemLoader('.'))
     template = env.get_template('template.html')
     
-    output_html = template.render(movies=data, now=datetime.datetime.now())
+    output_html = template.render(data=data, now=datetime.datetime.now())
     
     with open("index.html", "w", encoding='utf-8') as f:
         f.write(output_html)
@@ -157,11 +154,25 @@ def generate_html_page(data):
 # --- C. 主执行逻辑 ---
 if __name__ == "__main__":
     print("开始抓取热门影视信息...")
-    movies_data = scrape_movie_data()
     
-    if movies_data:
-        print(f"已成功抓取 {len(movies_data)} 部电影信息。")
-        generate_html_page(movies_data)
+    all_data = {
+        'domestic_movies': [],
+        'foreign_movies': [],
+        'domestic_series': []
+    }
+
+    # 抓取国内电影
+    all_data['domestic_movies'] = scrape_board("https://www.maoyan.com/board/1", "国内热映电影")
+
+    # 抓取海外电影
+    all_data['foreign_movies'] = scrape_board("https://www.maoyan.com/board/2", "海外热映电影")
+
+    # 抓取国内连续剧
+    all_data['domestic_series'] = scrape_board("https://www.maoyan.com/board/4", "国内热播连续剧")
+    
+    if any(all_data.values()):
+        print("已成功抓取所有榜单信息。")
+        generate_html_page(all_data)
         print("网页已成功生成：index.html")
     else:
-        print("未能抓取到任何电影信息，请检查脚本和网络连接。")
+        print("未能抓取到任何影视信息，请检查脚本和网络连接。")
