@@ -8,6 +8,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import WebDriverException, NoSuchElementException, TimeoutException
 
 # --- A. 数据抓取部分 ---
 def get_movie_details(movie_url):
@@ -25,7 +26,7 @@ def get_movie_details(movie_url):
     }
     
     try:
-        response = requests.get(movie_url, headers=headers)
+        response = requests.get(movie_url, headers=headers, timeout=10)
         response.raise_for_status()
         soup = BeautifulSoup(response.text, 'html.parser')
         
@@ -70,7 +71,7 @@ def scrape_board(url, title):
         # 自动安装和管理 Chrome 驱动
         service = Service(ChromeDriverManager().install())
         driver = webdriver.Chrome(service=service, options=chrome_options)
-    except Exception as e:
+    except WebDriverException as e:
         print(f"WebDriver 初始化失败: {e}")
         return []
     
@@ -126,11 +127,11 @@ def scrape_board(url, title):
                 
                 data_list.append(item_data)
 
-            except AttributeError as e:
+            except (NoSuchElementException, AttributeError) as e:
                 print(f"解析单个信息失败: {e}")
                 continue
                 
-    except Exception as e:
+    except (WebDriverException, TimeoutException) as e:
         print(f"抓取过程中发生错误: {e}")
     finally:
         # 确保浏览器被关闭，释放资源
@@ -144,12 +145,14 @@ def generate_html_page(data):
     使用 Jinja2 模板将抓取到的数据生成 HTML 页面。
     """
     env = Environment(loader=FileSystemLoader('.'))
-    template = env.get_template('template.html')
-    
-    output_html = template.render(data=data, now=datetime.datetime.now())
-    
-    with open("index.html", "w", encoding='utf-8') as f:
-        f.write(output_html)
+    try:
+        template = env.get_template('template.html')
+        output_html = template.render(data=data, now=datetime.datetime.now())
+        with open("index.html", "w", encoding='utf-8') as f:
+            f.write(output_html)
+    except Exception as e:
+        print(f"模板渲染或文件写入失败: {e}")
+
 
 # --- C. 主执行逻辑 ---
 if __name__ == "__main__":
