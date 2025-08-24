@@ -21,11 +21,12 @@
 </head>
 <body>
     <h1>每日热播影视排行榜</h1>
-    <p class="update-time">更新时间：{{ now.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+    <p class="update-time">更新时间：{{ now.strftime("%Y-%m-%d %H:%M:%S") }}</p>
 
-    {% if data %}
-        <h2>国内热映电影</h2>
-        {% for movie in data.domestic_movies %}
+    {% for category, movies in data.items() %}
+    {% if movies %}
+        <h2>{{ category | translate_category }}</h2>
+        {% for movie in movies %}
             <div class="movie-card">
                 {% if movie.image %}
                     <img src="{{ movie.image }}" alt="{{ movie.title }} 海报">
@@ -33,46 +34,18 @@
                 <div class="movie-info">
                     <h3>{{ loop.index }}. {{ movie.title }}</h3>
                     <p><strong>评分:</strong> {{ movie.rating }}</p>
-                    <p><strong>导演:</strong> {{ movie.director }}</p>
-                    <p><strong>主演:</strong> {{ movie.actors }}</p>
+                    {% if movie.director and movie.director != '未知' %}
+                        <p><strong>导演:</strong> {{ movie.director }}</p>
+                    {% endif %}
+                    {% if movie.actors and movie.actors != '未知' %}
+                        <p><strong>主演:</strong> {{ movie.actors }}</p>
+                    {% endif %}
                     <p class="summary">{{ movie.summary }}</p>
                 </div>
             </div>
         {% endfor %}
-
-        <h2>海外热映电影</h2>
-        {% for movie in data.foreign_movies %}
-            <div class="movie-card">
-                {% if movie.image %}
-                    <img src="{{ movie.image }}" alt="{{ movie.title }} 海报">
-                {% endif %}
-                <div class="movie-info">
-                    <h3>{{ loop.index }}. {{ movie.title }}</h3>
-                    <p><strong>评分:</strong> {{ movie.rating }}</p>
-                    <p><strong>导演:</strong> {{ movie.director }}</p>
-                    <p><strong>主演:</strong> {{ movie.actors }}</p>
-                    <p class="summary">{{ movie.summary }}</p>
-                </div>
-            </div>
-        {% endfor %}
-
-        <h2>国内热播连续剧</h2>
-        {% for movie in data.domestic_series %}
-            <div class="movie-card">
-                {% if movie.image %}
-                    <img src="{{ movie.image }}" alt="{{ movie.title }} 海报">
-                {% endif %}
-                <div class="movie-info">
-                    <h3>{{ loop.index }}. {{ movie.title }}</h3>
-                    <p><strong>评分:</strong> {{ movie.rating }}</p>
-                    <p><strong>导演:</strong> {{ movie.director }}</p>
-                    <p><strong>主演:</strong> {{ movie.actors }}</p>
-                    <p class="summary">{{ movie.summary }}</p>
-                </div>
-            </div>
-        {% endfor %}
-    {% else %}
-        <p style="text-align: center;">未能获取到影视信息。</p>
     {% endif %}
+    {% endfor %}
+    
 </body>
 </html>

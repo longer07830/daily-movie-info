@@ -10,9 +10,9 @@ from bs4 import BeautifulSoup
 from jinja2 import Environment, FileSystemLoader
 
 # --- A. 数据抓取部分 ---
-def scrape_board(url, title):
+def scrape_maoyan_board(url, title):
     """
-    通用抓取函数，用于抓取不同榜单的数据。
+    通用抓取函数，用于抓取猫眼电影榜单的数据。
     """
     chrome_options = Options()
     chrome_options.add_argument("--headless")
@@ -69,9 +69,6 @@ def scrape_board(url, title):
                         image_url = 'https:' + image_url
                     item_data['image'] = image_url
 
-                # 这里我们假设详情页的抓取比较困难，先只抓取榜单上的基本信息
-                # 如果需要详情，需要重新设计更复杂的抓取逻辑
-                
                 data_list.append(item_data)
 
             except Exception as e:
@@ -84,6 +81,67 @@ def scrape_board(url, title):
         driver.quit()
 
     return data_list
+
+def scrape_iqiyi_series():
+    """
+    抓取爱奇艺热播连续剧。
+    """
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
+    chrome_options.add_argument(f'user-agent={user_agent}')
+
+    try:
+        service = Service(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service, options=chrome_options)
+    except WebDriverException as e:
+        print(f"WebDriver 初始化失败: {e}")
+        return []
+
+    data_list = []
+    url = "https://www.iqiyi.com/channel/tv/"
+
+    try:
+        print("正在抓取爱奇艺热播连续剧...")
+        driver.get(url)
+        time.sleep(5)  # 等待页面加载
+
+        page_source = driver.page_source
+        soup = BeautifulSoup(page_source, 'html.parser')
+
+        # 找到爱奇艺热播榜单的容器
+        chart_container = soup.find('div', class_='iqiyi-recommend-list')
+        if not chart_container:
+            print("未找到爱奇艺推荐列表容器。")
+            return []
+
+        items = chart_container.find_all('a', class_='recommend-list-item')
+        for item in items:
+            try:
+                title_tag = item.find('p', class_='recommend-list-item-title')
+                image_tag = item.find('img')
+
+                item_data = {
+                    'title': title_tag.get_text(strip=True) if title_tag else '未知',
+                    'image': image_tag.get('src') if image_tag else '',
+                    'rating': '暂无评分', # 爱奇艺榜单没有直接评分
+                    'director': '未知',
+                    'actors': '未知',
+                    'summary': '暂无简介'
+                }
+                data_list.append(item_data)
+            except Exception as e:
+                print(f"解析单个爱奇艺剧集信息失败: {e}")
+                continue
+    except (WebDriverException, TimeoutException) as e:
+        print(f"抓取爱奇艺时发生错误: {e}")
+    finally:
+        driver.quit()
+
+    return data_list
+
 
 # --- B. 网页生成部分 ---
 def generate_html_page(data):
@@ -106,17 +164,17 @@ if __name__ == "__main__":
     all_data = {
         'domestic_movies': [],
         'foreign_movies': [],
-        'domestic_series': []
+        'domestic_series': [],
+        'iqiyi_series': []
     }
 
-    # 抓取国内电影
-    all_data['domestic_movies'] = scrape_board("https://www.maoyan.com/board/1", "国内热映电影")
-
-    # 抓取海外电影
-    all_data['foreign_movies'] = scrape_board("https://www.maoyan.com/board/2", "海外热映电影")
-
-    # 抓取国内连续剧
-    all_data['domestic_series'] = scrape_board("https://www.maoyan.com/board/4", "国内热播连续剧")
+    # 抓取猫眼榜单
+    all_data['domestic_movies'] = scrape_maoyan_board("https://www.maoyan.com/board/1", "国内热映电影")
+    all_data['foreign_movies'] = scrape_maoyan_board("https://www.maoyan.com/board/2", "海外热映电影")
+    all_data['domestic_series'] = scrape_maoyan_board("https://www.maoyan.com/board/4", "国内热播连续剧")
+    
+    # 抓取爱奇艺榜单
+    all_data['iqiyi_series'] = scrape_iqiyi_series()
     
     if any(all_data.values()):
         print("已成功抓取所有榜单信息。")
