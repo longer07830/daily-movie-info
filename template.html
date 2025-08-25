@@ -67,7 +67,7 @@
     {% for category, movies in data.items() %}
     {% if movies %}
         <div class="section-container">
-            <h2>{{ category }}</h2>
+            <h2>{{ category | translate_category }}</h2>
             {% for movie in movies %}
                 <div class="movie-card">
                     {% if movie.image %}
