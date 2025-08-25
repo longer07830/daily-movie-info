@@ -5,423 +5,479 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>每日热播影视排行榜</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.6; background-color: #f4f4f4; color: #333; padding: 20px; max-width: 900px; margin: auto; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+            line-height: 1.6; 
+            background-color: #f4f4f4; 
+            color: #333; 
+            padding: 20px; 
+            margin: auto; 
+        }
         h1, h2 { text-align: center; color: #555; }
         h2 { margin-top: 40px; border-bottom: 2px solid #ddd; padding-bottom: 5px; }
         .update-time { text-align: center; font-size: 0.9em; color: #777; margin-bottom: 20px; }
-        .movie-card { display: flex; align-items: flex-start; background-color: #fff; padding: 15px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.2s ease-in-out; }
+        .movie-card { 
+            display: flex; 
+            align-items: flex-start; 
+            background-color: #fff; 
+            padding: 15px; 
+            margin-bottom: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+            transition: transform 0.2s ease-in-out; 
+        }
         .movie-card:hover { transform: translateY(-5px); }
-        .movie-card img { width: 100px; height: 140px; border-radius: 4px; object-fit: cover; margin-right: 20px; flex-shrink: 0; }
+        .movie-card img { 
+            width: 100px; 
+            height: 140px; 
+            border-radius: 4px; 
+            object-fit: cover; 
+            margin-right: 20px; 
+            flex-shrink: 0; 
+        }
         .movie-info { flex-grow: 1; }
         .movie-info h3 { margin: 0 0 5px; color: #007bff; }
         .movie-info p { margin: 0 0 8px; color: #666; }
         .summary { font-size: 0.9em; color: #555; }
         .summary::before { content: "简介："; font-weight: bold; }
+
+        /* 新增布局样式 */
+        .all-sections-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .section-container {
+            flex-basis: calc(50% - 10px); /* 在大屏幕上显示两列 */
+            min-width: 300px; /* 保证在小屏幕上也能良好显示 */
+        }
+        @media (max-width: 768px) {
+            .section-container {
+                flex-basis: 100%; /* 在小屏幕上显示一列 */
+            }
+        }
     </style>
 </head>
 <body>
     <h1>每日热播影视排行榜</h1>
-    <p class="update-time">更新时间：2025-08-24 18:54:16</p>
+    <p class="update-time">更新时间：2025-08-25 00:11:52</p>
 
+    <div class="all-sections-container">
     
-        <h2>国内热映电影</h2>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/0fa334bf77e8d3d7e45294c38b7b1489319e5.jpg?imageView2/1/w/160/h/220" alt="捕风追影 海报">
-                
-                <div class="movie-info">
-                    <h3>1. 捕风追影</h3>
-                    <p><strong>评分:</strong> 暂无评分</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/0fa334bf3d6f873de215d594cb2ae27cd311f.jpg?imageView2/1/w/160/h/220" alt="浪浪山小妖怪 海报">
-                
-                <div class="movie-info">
-                    <h3>2. 浪浪山小妖怪</h3>
-                    <p><strong>评分:</strong> 暂无评分</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/0fa334bf77ee3209c33f673c65b4f62bad74e.jpg?imageView2/1/w/160/h/220" alt="南京照相馆 海报">
-                
-                <div class="movie-info">
-                    <h3>3. 南京照相馆</h3>
-                    <p><strong>评分:</strong> 暂无评分</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/0fa334bfc8b15d82bffa4638a4857a19e7ebe.png?imageView2/1/w/160/h/220" alt="死神来了：血脉诅咒 海报">
-                
-                <div class="movie-info">
-                    <h3>4. 死神来了：血脉诅咒</h3>
-                    <p><strong>评分:</strong> 暂无评分</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/0fa334bf4a1c8bc8be3e79e2080d31bfe1ac3.jpeg?imageView2/1/w/160/h/220" alt="坏蛋联盟2 海报">
-                
-                <div class="movie-info">
-                    <h3>5. 坏蛋联盟2</h3>
-                    <p><strong>评分:</strong> 暂无评分</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/0fa334b784514d25cebd6d874cd0338fd2c7e.jpg?imageView2/1/w/160/h/220" alt="罗小黑战记2 海报">
-                
-                <div class="movie-info">
-                    <h3>6. 罗小黑战记2</h3>
-                    <p><strong>评分:</strong> 暂无评分</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/0fa334bf77e77e8dd44a1887da3a96c089163.jpeg?imageView2/1/w/160/h/220" alt="东极岛 海报">
-                
-                <div class="movie-info">
-                    <h3>7. 东极岛</h3>
-                    <p><strong>评分:</strong> 暂无评分</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/0fa334bff8714d77e14948449d2ebb6ed66db.jpg?imageView2/1/w/160/h/220" alt="脱缰者也 海报">
-                
-                <div class="movie-info">
-                    <h3>8. 脱缰者也</h3>
-                    <p><strong>评分:</strong> 暂无评分</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/0fa334bf6e36e30511b786317b593b2ea6904.jpg?imageView2/1/w/160/h/220" alt="奇遇 海报">
-                
-                <div class="movie-info">
-                    <h3>9. 奇遇</h3>
-                    <p><strong>评分:</strong> 暂无评分</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/0fa334b7801ea4f87bb819f3fca009273290c.jpeg?imageView2/1/w/160/h/220" alt="夏雨来 海报">
-                
-                <div class="movie-info">
-                    <h3>10. 夏雨来</h3>
-                    <p><strong>评分:</strong> 暂无评分</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-
-        <h2>海外热映电影</h2>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mmdb/d2dad5927e10fa7e120e133e8e384aca6880e.jpg?imageView2/1/w/160/h/220" alt="精灵旅社3：疯狂假期 海报">
-                
-                <div class="movie-info">
-                    <h3>1. 精灵旅社3：疯狂假期</h3>
-                    <p><strong>评分:</strong> 暂无评分</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mmdb/d2dad5927e10fa7e12d23ce1d96c1943b7cc6.jpg?imageView2/1/w/160/h/220" alt="蚁人2：黄蜂女现身 海报">
-                
-                <div class="movie-info">
-                    <h3>2. 蚁人2：黄蜂女现身</h3>
-                    <p><strong>评分:</strong> 暂无评分</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mmdb/d2dad59253751b395baf33b1871d050625035.jpg?imageView2/1/w/160/h/220" alt="摩天营救 海报">
-                
-                <div class="movie-info">
-                    <h3>3. 摩天营救</h3>
-                    <p><strong>评分:</strong> 暂无评分</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mmdb/d2dad5927e10fa87a9281e4eb5e2fd6f7112a.jpg?imageView2/1/w/160/h/220" alt="超人总动员2 海报">
-                
-                <div class="movie-info">
-                    <h3>4. 超人总动员2</h3>
-                    <p><strong>评分:</strong> 暂无评分</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mmdb/d2dad5927e10fa2ff72ff7bcd3708341b11e6.jpg?imageView2/1/w/160/h/220" alt="侏罗纪世界2 海报">
-                
-                <div class="movie-info">
-                    <h3>5. 侏罗纪世界2</h3>
-                    <p><strong>评分:</strong> 暂无评分</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mmdb/d2dad59253751b7e1211e5fe4cc970a122428.jpg?imageView2/1/w/160/h/220" alt="人类清除计划4 海报">
-                
-                <div class="movie-info">
-                    <h3>6. 人类清除计划4</h3>
-                    <p><strong>评分:</strong> 暂无评分</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mmdb/d2dad592e7a06df0ee39dd965c898765f11bf.jpg?imageView2/1/w/160/h/220" alt="抱歉打扰 海报">
-                
-                <div class="movie-info">
-                    <h3>7. 抱歉打扰</h3>
-                    <p><strong>评分:</strong> 暂无评分</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mmdb/d2dad5927e10fab12dc6961486c84b1ccf65f.jpg?imageView2/1/w/160/h/220" alt="边境杀手2：边境战士 海报">
-                
-                <div class="movie-info">
-                    <h3>8. 边境杀手2：边境战士</h3>
-                    <p><strong>评分:</strong> 暂无评分</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mmdb/d2dad5925372ff9235be12cf6982b41461288.jpg?imageView2/1/w/160/h/220" alt="德鲁大叔 海报">
-                
-                <div class="movie-info">
-                    <h3>9. 德鲁大叔</h3>
-                    <p><strong>评分:</strong> 暂无评分</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mmdb/d2dad592030807ecd87df5d907b75ce57d98d.jpg?imageView2/1/w/160/h/220" alt="瞒天过海：美人计 海报">
-                
-                <div class="movie-info">
-                    <h3>10. 瞒天过海：美人计</h3>
-                    <p><strong>评分:</strong> 暂无评分</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-
-        <h2>国内热播连续剧</h2>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mmdb/54ecde9a2c9f2a51ba06d67d795a9434b8421.jpg?imageView2/1/w/160/h/220" alt="我不是药神 海报">
-                
-                <div class="movie-info">
-                    <h3>1. 我不是药神</h3>
-                    <p><strong>评分:</strong> 9.6</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mmdb/54ecde3311ef2abe12f0ee281b37b5fc0bc2b.jpg?imageView2/1/w/160/h/220" alt="肖申克的救赎 海报">
-                
-                <div class="movie-info">
-                    <h3>2. 肖申克的救赎</h3>
-                    <p><strong>评分:</strong> 9.5</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/cdf05c5cf87ea4f87bd8189dd2c5c8c208886.jpg?imageView2/1/w/160/h/220" alt="海上钢琴师 海报">
-                
-                <div class="movie-info">
-                    <h3>3. 海上钢琴师</h3>
-                    <p><strong>评分:</strong> 9.3</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mmdb/d2dad59253751b230f21f0818a5bfd4d8679c.jpg?imageView2/1/w/160/h/220" alt="绿皮书 海报">
-                
-                <div class="movie-info">
-                    <h3>4. 绿皮书</h3>
-                    <p><strong>评分:</strong> 9.5</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mmdb/fb7386beddd338537c8ea3bb80d25a9078b13.jpg?imageView2/1/w/160/h/220" alt="霸王别姬 海报">
-                
-                <div class="movie-info">
-                    <h3>5. 霸王别姬</h3>
-                    <p><strong>评分:</strong> 9.4</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mmdb/d2dad592c7e7e1d2367a3507befaed31a5903.jpg?imageView2/1/w/160/h/220" alt="美丽人生 海报">
-                
-                <div class="movie-info">
-                    <h3>6. 美丽人生</h3>
-                    <p><strong>评分:</strong> 9.3</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mmdb/54ecde92339923b12d807750dae3398ce9cce.jpg?imageView2/1/w/160/h/220" alt="这个杀手不太冷 海报">
-                
-                <div class="movie-info">
-                    <h3>7. 这个杀手不太冷</h3>
-                    <p><strong>评分:</strong> 9.6</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mmdb/d2dad592b125bfc9fd300b8a46169f8008efb.jpg?imageView2/1/w/160/h/220" alt="星际穿越 海报">
-                
-                <div class="movie-info">
-                    <h3>8. 星际穿越</h3>
-                    <p><strong>评分:</strong> 9.3</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mmdb/fb7386510fa2ffd7c3e19bcb2e6ea4dc44460.jpg?imageView2/1/w/160/h/220" alt="盗梦空间 海报">
-                
-                <div class="movie-info">
-                    <h3>9. 盗梦空间</h3>
-                    <p><strong>评分:</strong> 9.0</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
-            <div class="movie-card">
-                
-                    <img src="https://p0.pipi.cn/mmdb/fb73869af2a51b339e537c802afb40db7a7fe.jpg?imageView2/1/w/160/h/220" alt="泰坦尼克号 海报">
-                
-                <div class="movie-info">
-                    <h3>10. 泰坦尼克号</h3>
-                    <p><strong>评分:</strong> 9.6</p>
-                    <p><strong>导演:</strong> 未知</p>
-                    <p><strong>主演:</strong> 未知</p>
-                    <p class="summary">暂无简介</p>
-                </div>
-            </div>
-        
     
+        <div class="section-container">
+            <h2>domestic_movies</h2>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/0fa334bf77e8d3d7e45294c38b7b1489319e5.jpg?imageView2/1/w/160/h/220" alt="捕风追影 海报">
+                    
+                    <div class="movie-info">
+                        <h3>1. 捕风追影</h3>
+                        <p><strong>评分:</strong> 暂无评分</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/0fa334bf3d6f873de215d594cb2ae27cd311f.jpg?imageView2/1/w/160/h/220" alt="浪浪山小妖怪 海报">
+                    
+                    <div class="movie-info">
+                        <h3>2. 浪浪山小妖怪</h3>
+                        <p><strong>评分:</strong> 暂无评分</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/0fa334bf77ee3209c33f673c65b4f62bad74e.jpg?imageView2/1/w/160/h/220" alt="南京照相馆 海报">
+                    
+                    <div class="movie-info">
+                        <h3>3. 南京照相馆</h3>
+                        <p><strong>评分:</strong> 暂无评分</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/0fa334bfc8b15d82bffa4638a4857a19e7ebe.png?imageView2/1/w/160/h/220" alt="死神来了：血脉诅咒 海报">
+                    
+                    <div class="movie-info">
+                        <h3>4. 死神来了：血脉诅咒</h3>
+                        <p><strong>评分:</strong> 暂无评分</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/0fa334bf4a1c8bc8be3e79e2080d31bfe1ac3.jpeg?imageView2/1/w/160/h/220" alt="坏蛋联盟2 海报">
+                    
+                    <div class="movie-info">
+                        <h3>5. 坏蛋联盟2</h3>
+                        <p><strong>评分:</strong> 暂无评分</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/0fa334b784514d25cebd6d874cd0338fd2c7e.jpg?imageView2/1/w/160/h/220" alt="罗小黑战记2 海报">
+                    
+                    <div class="movie-info">
+                        <h3>6. 罗小黑战记2</h3>
+                        <p><strong>评分:</strong> 暂无评分</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/0fa334bf77e77e8dd44a1887da3a96c089163.jpeg?imageView2/1/w/160/h/220" alt="东极岛 海报">
+                    
+                    <div class="movie-info">
+                        <h3>7. 东极岛</h3>
+                        <p><strong>评分:</strong> 暂无评分</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/0fa334bff8714d77e14948449d2ebb6ed66db.jpg?imageView2/1/w/160/h/220" alt="脱缰者也 海报">
+                    
+                    <div class="movie-info">
+                        <h3>8. 脱缰者也</h3>
+                        <p><strong>评分:</strong> 暂无评分</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/0fa334bf6e36e30511b786317b593b2ea6904.jpg?imageView2/1/w/160/h/220" alt="奇遇 海报">
+                    
+                    <div class="movie-info">
+                        <h3>9. 奇遇</h3>
+                        <p><strong>评分:</strong> 暂无评分</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/0fa334b7801ea4f87bb819f3fca009273290c.jpeg?imageView2/1/w/160/h/220" alt="夏雨来 海报">
+                    
+                    <div class="movie-info">
+                        <h3>10. 夏雨来</h3>
+                        <p><strong>评分:</strong> 暂无评分</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+        </div>
+    
+    
+    
+        <div class="section-container">
+            <h2>foreign_movies</h2>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mmdb/d2dad5927e10fa7e120e133e8e384aca6880e.jpg?imageView2/1/w/160/h/220" alt="精灵旅社3：疯狂假期 海报">
+                    
+                    <div class="movie-info">
+                        <h3>1. 精灵旅社3：疯狂假期</h3>
+                        <p><strong>评分:</strong> 暂无评分</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mmdb/d2dad5927e10fa7e12d23ce1d96c1943b7cc6.jpg?imageView2/1/w/160/h/220" alt="蚁人2：黄蜂女现身 海报">
+                    
+                    <div class="movie-info">
+                        <h3>2. 蚁人2：黄蜂女现身</h3>
+                        <p><strong>评分:</strong> 暂无评分</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mmdb/d2dad59253751b395baf33b1871d050625035.jpg?imageView2/1/w/160/h/220" alt="摩天营救 海报">
+                    
+                    <div class="movie-info">
+                        <h3>3. 摩天营救</h3>
+                        <p><strong>评分:</strong> 暂无评分</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mmdb/d2dad5927e10fa87a9281e4eb5e2fd6f7112a.jpg?imageView2/1/w/160/h/220" alt="超人总动员2 海报">
+                    
+                    <div class="movie-info">
+                        <h3>4. 超人总动员2</h3>
+                        <p><strong>评分:</strong> 暂无评分</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mmdb/d2dad5927e10fa2ff72ff7bcd3708341b11e6.jpg?imageView2/1/w/160/h/220" alt="侏罗纪世界2 海报">
+                    
+                    <div class="movie-info">
+                        <h3>5. 侏罗纪世界2</h3>
+                        <p><strong>评分:</strong> 暂无评分</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mmdb/d2dad59253751b7e1211e5fe4cc970a122428.jpg?imageView2/1/w/160/h/220" alt="人类清除计划4 海报">
+                    
+                    <div class="movie-info">
+                        <h3>6. 人类清除计划4</h3>
+                        <p><strong>评分:</strong> 暂无评分</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mmdb/d2dad592e7a06df0ee39dd965c898765f11bf.jpg?imageView2/1/w/160/h/220" alt="抱歉打扰 海报">
+                    
+                    <div class="movie-info">
+                        <h3>7. 抱歉打扰</h3>
+                        <p><strong>评分:</strong> 暂无评分</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mmdb/d2dad5927e10fab12dc6961486c84b1ccf65f.jpg?imageView2/1/w/160/h/220" alt="边境杀手2：边境战士 海报">
+                    
+                    <div class="movie-info">
+                        <h3>8. 边境杀手2：边境战士</h3>
+                        <p><strong>评分:</strong> 暂无评分</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mmdb/d2dad5925372ff9235be12cf6982b41461288.jpg?imageView2/1/w/160/h/220" alt="德鲁大叔 海报">
+                    
+                    <div class="movie-info">
+                        <h3>9. 德鲁大叔</h3>
+                        <p><strong>评分:</strong> 暂无评分</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mmdb/d2dad592030807ecd87df5d907b75ce57d98d.jpg?imageView2/1/w/160/h/220" alt="瞒天过海：美人计 海报">
+                    
+                    <div class="movie-info">
+                        <h3>10. 瞒天过海：美人计</h3>
+                        <p><strong>评分:</strong> 暂无评分</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+        </div>
+    
+    
+    
+        <div class="section-container">
+            <h2>domestic_series</h2>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mmdb/54ecde9a2c9f2a51ba06d67d795a9434b8421.jpg?imageView2/1/w/160/h/220" alt="我不是药神 海报">
+                    
+                    <div class="movie-info">
+                        <h3>1. 我不是药神</h3>
+                        <p><strong>评分:</strong> 9.6</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mmdb/54ecde3311ef2abe12f0ee281b37b5fc0bc2b.jpg?imageView2/1/w/160/h/220" alt="肖申克的救赎 海报">
+                    
+                    <div class="movie-info">
+                        <h3>2. 肖申克的救赎</h3>
+                        <p><strong>评分:</strong> 9.5</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mediaplus/friday_image_fe/cdf05c5cf87ea4f87bd8189dd2c5c8c208886.jpg?imageView2/1/w/160/h/220" alt="海上钢琴师 海报">
+                    
+                    <div class="movie-info">
+                        <h3>3. 海上钢琴师</h3>
+                        <p><strong>评分:</strong> 9.3</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mmdb/d2dad59253751b230f21f0818a5bfd4d8679c.jpg?imageView2/1/w/160/h/220" alt="绿皮书 海报">
+                    
+                    <div class="movie-info">
+                        <h3>4. 绿皮书</h3>
+                        <p><strong>评分:</strong> 9.5</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mmdb/fb7386beddd338537c8ea3bb80d25a9078b13.jpg?imageView2/1/w/160/h/220" alt="霸王别姬 海报">
+                    
+                    <div class="movie-info">
+                        <h3>5. 霸王别姬</h3>
+                        <p><strong>评分:</strong> 9.4</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mmdb/d2dad592c7e7e1d2367a3507befaed31a5903.jpg?imageView2/1/w/160/h/220" alt="美丽人生 海报">
+                    
+                    <div class="movie-info">
+                        <h3>6. 美丽人生</h3>
+                        <p><strong>评分:</strong> 9.3</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mmdb/54ecde92339923b12d807750dae3398ce9cce.jpg?imageView2/1/w/160/h/220" alt="这个杀手不太冷 海报">
+                    
+                    <div class="movie-info">
+                        <h3>7. 这个杀手不太冷</h3>
+                        <p><strong>评分:</strong> 9.6</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mmdb/d2dad592b125bfc9fd300b8a46169f8008efb.jpg?imageView2/1/w/160/h/220" alt="星际穿越 海报">
+                    
+                    <div class="movie-info">
+                        <h3>8. 星际穿越</h3>
+                        <p><strong>评分:</strong> 9.3</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mmdb/fb7386510fa2ffd7c3e19bcb2e6ea4dc44460.jpg?imageView2/1/w/160/h/220" alt="盗梦空间 海报">
+                    
+                    <div class="movie-info">
+                        <h3>9. 盗梦空间</h3>
+                        <p><strong>评分:</strong> 9.0</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+                <div class="movie-card">
+                    
+                        <img src="https://p0.pipi.cn/mmdb/fb73869af2a51b339e537c802afb40db7a7fe.jpg?imageView2/1/w/160/h/220" alt="泰坦尼克号 海报">
+                    
+                    <div class="movie-info">
+                        <h3>10. 泰坦尼克号</h3>
+                        <p><strong>评分:</strong> 9.6</p>
+                        
+                        
+                        <p class="summary">暂无简介</p>
+                    </div>
+                </div>
+            
+        </div>
+    
+    
+    
+    
+    </div>
 </body>
 </html>
